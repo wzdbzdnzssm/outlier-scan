@@ -4,9 +4,11 @@
 
 ## 运行
 
-在项目目录执行：
+下载仓库后运行自带样例：
 
 ```bash
+git clone https://github.com/wzdbzdnzssm/outlier-scan.git
+cd outlier-scan
 python3 scripts/anomaly_detector.py examples/synthetic_spike.csv
 python3 scripts/anomaly_detector.py examples/synthetic_missing.csv --columns value --methods iqr,moving-avg --window 3
 python3 scripts/anomaly_detector.py data.csv --output report.json

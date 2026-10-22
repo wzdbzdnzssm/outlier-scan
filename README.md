@@ -6,9 +6,11 @@ This is statistical screening, **not causal explanation, forecasting, or proof t
 
 ## Quick start
 
-From the project directory:
+Download the repository, then run the bundled example:
 
 ```bash
+git clone https://github.com/wzdbzdnzssm/outlier-scan.git
+cd outlier-scan
 python3 scripts/anomaly_detector.py examples/synthetic_spike.csv
 python3 scripts/anomaly_detector.py examples/synthetic_spike.csv --columns value --methods iqr,moving-avg --window 3
 python3 scripts/anomaly_detector.py examples/synthetic_missing.csv --columns value --output report.json

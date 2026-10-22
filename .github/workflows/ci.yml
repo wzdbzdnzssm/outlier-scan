@@ -1,0 +1,32 @@
+name: Python checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.10', '3.11', '3.12', '3.13', '3.14']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit and CLI tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Standalone self verification
+        run: python3 scripts/anomaly_detector.py --test
+      - name: Synthetic fixtures
+        run: |
+          python3 scripts/anomaly_detector.py examples/synthetic_spike.csv
+          python3 scripts/anomaly_detector.py examples/synthetic_missing.csv --columns value
